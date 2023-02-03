@@ -124,7 +124,7 @@ body {
     height: 90px;
     background-color: rgb(255, 255, 255, 0.4);
     width: 600px;
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translate(-50%);
     border-bottom-right-radius: 10px;
