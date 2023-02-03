@@ -1,0 +1,18 @@
+.load-spiner {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    //border: 10px solid rgb(99, 99, 99, 0.4);
+    border-top: 10px solid rgba(255, 255, 255);
+    animation: spining 0.6s infinite linear;
+}
+
+@keyframes spining {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

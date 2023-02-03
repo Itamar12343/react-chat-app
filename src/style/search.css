@@ -1,0 +1,20 @@
+.search-input {
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    transform: translate(-50%, -50%);
+    outline: none;
+    border-bottom: 2px solid #aaa;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+}
+
+@media (max-width: 386px) {
+    .search-input {
+        width: 90%;
+    }
+}
