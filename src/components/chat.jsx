@@ -139,10 +139,18 @@ const Chat = (chatname) => {
                     let gotmsgI = gotmsg[i];
 
                     if(gotmsgI.user === localStorage.getItem("username")){
+                        if(gotmsgI.img){
+                            createImg(gotmsgI.img,gotmsgI.time);
+                        }else{
                         createMsg(gotmsgI.text, gotmsgI.time);
+                        }
                         scrollDown();
                     }else if(gotmsgI.user){
+                        if(gotmsgI.img){
+                            create_e_Img(gotmsgI.img, gotmsgI.time);
+                        }else{
                         create_e_Msg(gotmsgI.text, gotmsgI.time);
+                        }
                         scrollDown();
                     }
 
@@ -176,9 +184,15 @@ const Chat = (chatname) => {
             if(gotnumber > number){
                 number = number + 1;
 
-            if(gotmsg.user !== localStorage.getItem("username") && gotmsg.text){
-                playGetSound();
+            if(gotmsg.user !== localStorage.getItem("username")){
+                if(gotmsg.img){
+                    console.log("iuytr");
+                    create_e_Img(gotmsg.img, gotmsg.time);
+                    playGetSound();
+                }else if(gotmsg.text){
                 create_e_Msg(gotmsg.text, gotmsg.time);
+                playGetSound();
+                }
                 
                 scrollDown();
             }
@@ -221,6 +235,29 @@ const Chat = (chatname) => {
         }]);
     }
 
+    
+    function createImg(img,time){
+        if(nomsg !== false){
+            setnomsg(false);
+            }
+        setmsgs(prev=>[...prev, {
+            img: img,
+            type: "msg",
+            time: time
+        }]);
+    }
+
+    function create_e_Img(img,time){
+        if(nomsg !== false){
+        setnomsg(false);
+        }
+        setmsgs(prev=>[...prev, {
+            img: img,
+            type: "emsg",
+            time: time
+        }]);
+    }
+
     function incrimentMsgNumber(){
         chatsref.child(chatwith).child("number").set({
             number: msgnumber + 1
@@ -228,13 +265,34 @@ const Chat = (chatname) => {
     }
 
     function send(e){
+        if(beforeSendImg){
+            let today = new Date();
+            let hour = today.getHours();
+            let minute = today.getMinutes();
+            cancel_img();
+            playSendSound();
+            chatsref.child(chatwith).child(msgnumber + 1).set({
+                img: beforeSendImg,
+                user: localStorage.getItem("username"),
+                time: `${hour}:${minute}`,
+                seen: false,
+                type: "msg"
+            });
+            setmsgs(prev =>[...prev,{
+                img: beforeSendImg,
+                type: "msg",
+                time: `${hour}:${minute}`
+            }]);
+            scrollDown();
+            incrimentMsgNumber();
+        }
+        
         if(inputref.current.value.length > 0){
             let today = new Date();
             let hour = today.getHours();
             let minute = today.getMinutes();
             //console.log(`${hour}:${minute}`);
             playSendSound();
-            createMsg(inputref.current.value,`${hour}:${minute}`);
             //console.log(msgnumber);
             chatsref.child(chatwith).child(msgnumber + 1).set({
                 text: inputref.current.value,
@@ -243,6 +301,8 @@ const Chat = (chatname) => {
                 seen: false,
                 type: "msg"
             });
+            createMsg(inputref.current.value,`${hour}:${minute}`);
+        
             incrimentMsgNumber();
             setsendstate("camera");
            inputref.current.value = "";
@@ -312,6 +372,14 @@ const Chat = (chatname) => {
             
             {msgs.map(msg =>{
                 if(msg.type === "msg"){
+                    if(msg.img){
+                        return(
+                            <div onContextMenu={longpress} key={crypto.randomUUID()} style={{backgroundImage: `url(${msg.img})`,color: "#fff"}} className="gotimg">
+                              <div key={crypto.randomUUID()} className="time">{msg.time}</div>
+                              <Check2All key={crypto.randomUUID()} className="check"/>
+                            </div>
+                            );
+                    }else{
                 return(
                 <div onContextMenu={longpress} key={crypto.randomUUID()} className="msg">
                   <div key={crypto.randomUUID()} className="time">{msg.time}</div>
@@ -319,13 +387,22 @@ const Chat = (chatname) => {
                   <div key={crypto.randomUUID()} className="msg-text">{msg.text}</div>
                 </div>
                 );
+                    }
             }else{
+                if(msg.img){
+                    return(
+                        <div onContextMenu={longpress} key={crypto.randomUUID()} style={{backgroundImage: `url(${msg.img})`,color:"#fff"}} className="e-gotimg">
+                          <div key={crypto.randomUUID()} className="time">{msg.time}</div>
+                        </div>
+                        );
+                }else{
                 return(
                 <div onContextMenu={longpress} key={crypto.randomUUID()} className="e-msg">
                 <div key={crypto.randomUUID()} className="e-time">{msg.time}</div>
                 <div key={crypto.randomUUID()} className="emsg-text">{msg.text}</div>
               </div>
                 );
+            }
             }
             })}
 

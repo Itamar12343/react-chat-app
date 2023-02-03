@@ -28,6 +28,43 @@ body {
     width: fit-content;
 }
 
+.gotimg {
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 300px;
+    background-color: rgb(114, 254, 146);
+    position: relative;
+    margin-top: 20px;
+    font-size: 26px;
+    padding: 16px;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    text-align: right;
+    margin-inline: 20px;
+    position: relative;
+    padding-left: 90px;
+}
+
+.e-gotimg {
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    font-size: 26px;
+    padding: 16px;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
+    text-align: right;
+    margin-inline: 20px;
+    padding-left: 60px;
+    min-width: 150px;
+    margin-left: auto;
+    position: relative;
+}
+
 body {
     overflow: hidden;
 }
