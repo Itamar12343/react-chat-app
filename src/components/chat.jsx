@@ -283,7 +283,6 @@ const Chat = (chatname) => {
     function longpress(e){
         e.preventDefault();
         setlongpressState(true);
-        console.log("dfguiop[");
     }
 
     //console.log(chatname.img);
@@ -294,7 +293,7 @@ const Chat = (chatname) => {
 
 
     return ( 
-        <div className="all-chat">
+        <>
         <div className="head">
             <ArrowLeft className="back-btn" onClick={goback}/>
             <div className="longpress-menu">
@@ -306,7 +305,7 @@ const Chat = (chatname) => {
         </div>
         <div ref={chatboxref} className="chat-box">
 
-        {nomsg && <div key={crypto.randomUUID()} className="e-msg">
+        {nomsg && <div onContextMenu={longpress} key={crypto.randomUUID()} className="e-msg">
                 <div key={crypto.randomUUID()} className="e-time">{nomsg.time}</div>
                 <div key={crypto.randomUUID()} className="emsg-text">{nomsg.text}</div>
               </div>}
@@ -338,7 +337,7 @@ const Chat = (chatname) => {
         {sendstte === "send" ? <SendFill className="send-btn" onClick={send}/> : <CameraFill onClick={goToCamera} className="camera-btn"/>}
           <textarea className="input" cols="30" rows="10" placeholder="הודעה" ref={inputref} onKeyUp={autoresize_input}></textarea>
         </div>
-        </div>
+        </>
      );
 }
  

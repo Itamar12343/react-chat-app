@@ -194,10 +194,6 @@ body {
     width: 80px;
 }
 
-.all-chat {
-    overflow: hidden;
-}
-
 .copy:hover,
 .share:hover {
     background-color: rgba(0, 0, 0, 0.8);
