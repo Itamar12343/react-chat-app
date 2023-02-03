@@ -8,10 +8,11 @@ body {
     height: 73%;
     position: absolute;
     left: 50%;
-    top: 49.5%;
+    top: 30%;
     transform: translate(-50%, -50%);
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: #aaa;
 }
 
 .msg {
@@ -257,7 +258,6 @@ body {
     }
     .chat-box {
         width: 100%;
-        height: 78%;
         top: 50%;
     }
 }
