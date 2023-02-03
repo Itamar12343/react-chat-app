@@ -6,12 +6,13 @@ body {
 .chat-box {
     width: 580px;
     height: 73%;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 49.5%;
     transform: translate(-50%, -50%);
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: #aaa;
 }
 
 .msg {
