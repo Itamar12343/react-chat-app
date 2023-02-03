@@ -282,7 +282,7 @@ const Chat = (chatname) => {
 
     function longpress(e){
         e.preventDefault();
-        setlongpressState(true);
+        //setlongpressState(true);
     }
 
     //console.log(chatname.img);

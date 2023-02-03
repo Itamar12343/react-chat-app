@@ -59,7 +59,7 @@ const SearchResults = () => {
 
 function clickandHold(e){
     e.preventDefault();
-    e.target.style.backgroundColor = "red";
+    //e.target.style.backgroundColor = "red";
 }
 
 
